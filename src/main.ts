@@ -18,6 +18,7 @@ interface HabitTrackerSettings {
 	openDailyNoteOnClick: boolean;
 	gapStyle: string;
 	sortProperty: string;
+	cellSize: number;
 }
 
 const DEFAULT_SETTINGS: HabitTrackerSettings = {
@@ -29,7 +30,8 @@ const DEFAULT_SETTINGS: HabitTrackerSettings = {
 	showStreaks: true,
 	openDailyNoteOnClick: true,
 	gapStyle: 'default',
-	sortProperty: 'sort_index'
+	sortProperty: 'sort_index',
+	cellSize: 100
 }
 
 export default class HabitTracker21 extends Plugin {
@@ -411,6 +413,18 @@ class HabitTrackerSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.openDailyNoteOnClick)
 				.onChange(async (value) => {
 					this.plugin.settings.openDailyNoteOnClick = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Cell size')
+			.setDesc('Size of the day cells, as a percentage of the default. Larger cells are easier to tap on mobile. Can be overridden with "cellSize" in code blocks.')
+			.addSlider(slider => slider
+				.setLimits(100, 200, 10)
+				.setDynamicTooltip()
+				.setValue(this.plugin.settings.cellSize)
+				.onChange(async (value) => {
+					this.plugin.settings.cellSize = value;
 					await this.plugin.saveSettings();
 				}));
 

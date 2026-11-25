@@ -27,17 +27,10 @@ div:has(.block-language-habittracker),
 	--habit-name-font-size: 13px;
 
 	/* Cell dimensions */
-	--habit-cell-width: 25px;
-	--habit-cell-height: 32px;
 	--habit-name-max-width: 173px;
 	--habit-name-padding: 8px;
 
-	/* Tick size */
-	--habit-tick-size: 16px;
-	--habit-tick-roundess: calc(var(--habit-tick-size) / 2);
-
 	/* Border radius */
-	--habit-streak-radius: calc(var(--habit-tick-size) / 2);
 	--habit-tooltip-radius: 3px;
 
 	/* Spacing */
@@ -162,6 +155,13 @@ div:has(.block-language-habittracker),
 }
 
 .habit-tracker {
+	/* Declared here, not on the ancestor above, so they can read --habit-cell-scale set inline on this element */
+	--habit-cell-width: calc(25px * var(--habit-cell-scale, 1));
+	--habit-cell-height: calc(32px * var(--habit-cell-scale, 1));
+	--habit-tick-size: calc(16px * var(--habit-cell-scale, 1));
+	--habit-tick-roundess: calc(var(--habit-tick-size) / 2);
+	--habit-streak-radius: calc(var(--habit-tick-size) / 2);
+
 	display: grid;
 	grid-template-columns: 1fr repeat(
 			var(--date-columns),
@@ -325,7 +325,7 @@ div:has(.block-language-habittracker),
 .habit-tick--streak-gap .habit-tick__inner {
 	/* background: color-mix(in srgb, var(--habit-bg-ticked) 30%, transparent); */
 	background: var(--habit-bg-ticked);
-	height: 8px;
+	height: calc(var(--habit-tick-size) / 2);
 }
 .habit-tick--ticked + .habit-tick--gap-default:before {
 	display: inline-block;

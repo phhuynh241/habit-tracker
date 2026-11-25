@@ -30,6 +30,7 @@
 		debug: boolean
 		matchLineLength: boolean
 		sortProperty: string
+		cellSize: number
 	}
 
 	interface HabitData {
@@ -68,6 +69,7 @@
 		openDailyNoteOnClick: boolean
 		gapStyle: string
 		sortProperty: string
+		cellSize: number
 	}
 	export let userSettings: Partial<{
 		path: string
@@ -80,6 +82,7 @@
 		showStreaks: boolean
 		gapStyle: string
 		sortProperty: string
+		cellSize: number
 	}>
 
 	// Default settings - use global settings as defaults
@@ -93,6 +96,7 @@
 		debug: globalSettings.debug,
 		matchLineLength: globalSettings.matchLineLength,
 		sortProperty: globalSettings.sortProperty,
+		cellSize: globalSettings.cellSize,
 	})
 
 	// Initialize unified state
@@ -134,6 +138,10 @@
 				userSettings.matchLineLength !== undefined
 					? userSettings.matchLineLength
 					: state.settings.matchLineLength,
+			cellSize:
+				userSettings.cellSize !== undefined
+					? userSettings.cellSize
+					: state.settings.cellSize,
 			debug:
 				userSettings.debug !== undefined
 					? userSettings.debug
@@ -456,7 +464,7 @@
 		class="habit-tracker {state.settings.matchLineLength
 			? 'habit-tracker--match-line-length'
 			: ''}"
-		style="--date-columns: {state.computed.dates.length}"
+		style="--date-columns: {state.computed.dates.length}; --habit-cell-scale: {state.settings.cellSize / 100}"
 		bind:this={state.ui.rootElement}
 	>
 		<div class="habit-tracker__header habit-tracker__row">

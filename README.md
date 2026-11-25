@@ -128,6 +128,7 @@ Access via **Settings > Community plugins > Habit Tracker** to set defaults for 
 - **Open daily note on date click** - Click a date in the header row to open the corresponding daily note (default: on). Requires the Daily Notes core plugin or the Periodic Notes community plugin
 - **Debug Mode** - Toggle debug output on/off
 - **Match Line Length** - Fit tracker to readable line width
+- **Cell Size** - Slider from 100% to 200% to enlarge day cells for easier tapping on mobile (default: 100%)
 
 ### Per-Tracker Settings
 
@@ -160,6 +161,7 @@ Override global settings in individual code blocks:
 | `sortProperty`      | string  | "sort_index" | Frontmatter property that sets the order of habits. Use "" to sort alphabetically |
 | `debug`             | boolean | false   | Enable debug console output                                                      |
 | `matchLineLength`   | boolean | false   | Match readable line width                                                        |
+| `cellSize`          | number  | 100     | Size of the day cells as a percentage of the default (e.g. 150)                  |
 
 ### Per-Habit Settings (frontmatter)
 
